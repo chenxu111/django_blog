@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+<html>
+<body>
+<h1>Articles</h1>
+{%block sidebar%}
+	<ui>
+		<ul><a href="/articles/all">Articles</a></ul>
+		<ul><a href="/articles/create">Create Article</a></ul>
+	</ui>
+{%endblock%}
+
+{%block content%}
+<h2> language is {{language}}<h2>
+<h2> session language is {{session_language}}</h2>
+{% if articles.count > 0 %}
+{% for article in articles %}
+<div>
+	<h2><a href='/articles/get/{{article.id}}/'>{{article.title}}</a></h2>
+	<p>{{article.body|lower|truncatewords:"20"}}</p>
+	likes {{article.likes}}
+</div>
+{% endfor %}
+{%else %}
+	<p>None to show</p>
+{%endif%}
+</body>
+{%endblock%}
+</html>

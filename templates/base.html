@@ -1,0 +1,30 @@
+{%load static%}
+<html>
+<head>
+	<title>{%block title%}my base template {%endblock%}</title>
+	<link rel="stylesheet" type="text/css" href="{%static "assets/css/default.css"%}">
+
+</head>
+<body>
+	<div id="page">
+		<div id ="sidebar">
+			{%block sidebar%}
+			<ul>
+				<li> <a href="/articles/all">Articles</a></li>
+				<li> <a href="/admin/">Admin</a></li>
+				<li> <a href="/accounts/login/">login</a></li>
+				<li> <a href="/accounts/register/">register</a></li>
+
+			</ul>
+			{%endblock%}
+		</div>
+
+		<div id="content">
+			{%block content%}this is content area{%endblock%}
+			<p>
+				<img src="{%static "assets/images/python-logo.gif"%}" width="200"/>
+			</p>
+		</div>
+	</div>
+</body>
+</html>
