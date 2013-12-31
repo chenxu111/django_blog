@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0063)http://sdk.tools.sinaapp.com/index.php?appname=nbtlxx&version=1 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>SAE Editor</title>
+        <link href="./SAE Editor_files/sae_editor.css" rel="stylesheet" type="text/css">
+        <link href="./SAE Editor_files/codemirror.css" rel="stylesheet" type="text/css">
+        <link href="./SAE Editor_files/night.css" rel="stylesheet" type="text/css">
+        <link href="./SAE Editor_files/cobalt.css" rel="stylesheet" type="text/css">
+        <link href="./SAE Editor_files/jquery-ui.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="./SAE Editor_files/jquery.min.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/sae_editor.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/codemirror.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/css.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/javascript.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/xml.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/clike.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/htmlmixed.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/php.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/yaml.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/python.js"></script>
+        <script type="text/javascript" src="./SAE Editor_files/ajaxfileupload.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("#select_applist").val('nbtlxx');
+    $("#select_versionlist").val('1');
+    sae_glvar.appname = 'nbtlxx';
+    getDir('1/','/');
+});
+</script>
+    </head>
+    <body>
+        <div class="topbar"> 
+            <span class="logo"><a href="http://sdk.tools.sinaapp.com/index.php?appname=nbtlxx&version=1#"><img src="./SAE Editor_files/logo.gif" width="31" height="31" alt="logo"></a> </span> 
+            <span class="title">SAE CLOUD EDITOR</span> 
+            <span id="title_appname">APP:<span>nbtlxx</span></span> 
+            <span id="title_version">VERSION:<span>1</span></span> 
+            <span id="opmsg" style="margin-left:30px;font-size:12px;"></span> 
+            <span style="float:right;margin-left:10px;">
+               <a href="javascript:void(0);" onclick="logout()" style="color:#FFF;font-size:14px;">注销</a> 
+            </span> 
+            <span class="saveall">
+                <input type="button" class="saveall_btn" value="全部保存" name="saveall" onclick="saveAll()">
+            </span> 
+            <div class="clr"></div>
+        </div>
+        <div class="ebody" style="">
+            <div class="eleft">
+                <div class="tabbar_bg bodr_r">
+                    <span style="margin-left:5px;">应用</span>
+                    <select id="select_applist" style="width:115px;overflow-x:hidden;">
+                                                <option value="nbtlxx">nbtlxx</option>                
+                                            </select>
+                    <select id="select_versionlist">
+                                                <option value="1">1</option>                
+                                            </select>
+                    <a id="newapplink" href="" target="_blank"></a>
+                </div>
+                <div id="naviarea" class="bodr_r" onselectstart="return false;">
+                    <div class="applistbar bodr_b" style="overflow: hidden;"> 
+                        <div style="width:150px;float:left;overflow:hidden;">
+                            <span style="margin-left:5px;">路径</span>
+                            <span class="applist">
+                                <select name="pathlist" id="pathlist" style="width:115px;overflow-x:hidden;">
+                                <option value="1/">/</option></select>
+                            </span>
+                        </div>
+                        <div style="width:60px;float:left;">
+                            <span class="icon" id="createfile_icon" style="margin-left:5px;"><img src="./SAE Editor_files/file_add_icon.gif" width="16" height="17" alt="create file" title="新建文件"></span> 
+                            <span class="icon" id="createfolder_icon" style="margin-left:5px;"><img src="./SAE Editor_files/folder_add_icon.gif" width="18" height="16" alt="create folder" title="新建文件夹"></span> 
+                            <span class="icon" id="uploadfile_icon" style="margin-left:5px;"><img src="./SAE Editor_files/file_upload_icon.gif" width="11" height="13" alt="create file" title="上传文件"></span> 
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div id="filelist" style="height: 532px;">
+                        <div id="selected_bg" class="selected_bg" style="top: 20px; display: block;"></div>
+                        <div id="treecontainer">
+                            <ul class="tree" id="filetree"><li class="file" title="config.yaml"><div class="name" path="1/config.yaml" editable="true" url="http://1.nbtlxx.sinaapp.com/config.yaml">config.yaml</div></li><li class="file" title="index.wsgi"><div class="name selected" path="1/index.wsgi" editable="true" url="http://1.nbtlxx.sinaapp.com/index.wsgi">index.wsgi</div></li></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eright" style="width: 1007px;">
+                <div onselectstart="return false;" class="tabbar_bg">
+                    <div id="show_hide_filelist" class="tabbar_bg bodr_r">《</div>
+                    <div id="prefile" class="tabbar_bg bodr_r">&lt;</div>
+                    <div id="tabbarcontainer" class="tabbarout" style="width: 968px;">
+                        <div id="tabbar" class="tabbar tabbar_bg"><div class="tab bodr_r cur_tab" id="tab_1" path="1/index.wsgi" tabi="1"> <span class="title">1/index.wsgi</span> <span class="icon"><a href="http://sdk.tools.sinaapp.com/index.php?appname=nbtlxx&version=1#"><img src="./SAE Editor_files/z.gif" width="10" height="10" class="save_icon"></a></span><div class="clr"></div></div><div class="tab bodr_r" id="tab_0" path="1/config.yaml" tabi="0"> <span class="title">1/config.yaml</span> <span class="icon"><a href="http://sdk.tools.sinaapp.com/index.php?appname=nbtlxx&version=1#"><img src="./SAE Editor_files/z.gif" width="10" height="10" class="close_icon"></a></span><div class="clr"></div></div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                    <div id="nextfile" class="tabbar_bg bodr_l">&gt;</div>
+                    <div class="clr"></div>
+                </div>
+                <div id="codearea" class="codearea" style="height: 558px;"><div class="codecontainer" id="codecontainer_1" tabi="1" style="display: block; height: 558px;"><div class="CodeMirror cm-s-cobalt CodeMirror-focused" style="height: 558px;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 76px; left: 250px;"><textarea autocorrect="off" autocapitalize="off" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-hscrollbar" style="left: 29px;"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="false"><div style="position: relative; min-height: 100%;"><div class="CodeMirror-sizer" style="min-width: 520px; margin-left: 29px; min-height: 116px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span> </span><span> </span><span> </span><span> </span><span class="cm-keyword">r</span><span class="cm-keyword">e</span><span class="cm-keyword">t</span><span class="cm-keyword">u</span><span class="cm-keyword">r</span><span class="cm-keyword">n</span><span> </span><span>[</span><span class="cm-string">'</span><span class="cm-string">&lt;</span><span class="cm-string">s</span><span class="cm-string">t</span><span class="cm-string">r</span><span class="cm-string">o</span><span class="cm-string">n</span><span class="cm-string">g</span><span class="cm-string">&gt;</span><span class="cm-string">h</span><span class="cm-string">e</span><span class="cm-string">l</span><span class="cm-string">l</span><span class="cm-string">o</span><span class="cm-string">w</span><span class="cm-string">o</span><span class="cm-string">r</span><span class="cm-string">l</span><span class="cm-string">d</span><span class="cm-string">!</span><span class="cm-string">&lt;</span><span class="cm-string">/</span><span class="cm-string">s</span><span class="cm-string">t</span><span class="cm-string">r</span><span class="cm-string">o</span><span class="cm-string">n</span><span class="cm-string">g</span><span class="cm-string">&gt;</span><span class="cm-string">'</span><span>]</span></pre></div><div style="position: relative; z-index: 1; display: none;"><div class="CodeMirror-selected" style="position: absolute; left: 151px; top: 72px; width: 98px; height: 12px;"></div></div><div style=""><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">1</div></div><pre><span class="cm-keyword">import</span> <span class="cm-variable">sae</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre><span class="cm-keyword">def</span> <span class="cm-variable">app</span>(<span class="cm-variable">environ</span>, <span class="cm-variable">start_response</span>):</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre>    <span class="cm-variable">status</span> = <span class="cm-string">'200 OK'</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre>    <span class="cm-variable">response_headers</span> = [(<span class="cm-string">'Content-type'</span>, <span class="cm-string">'text/html; charset=utf-8'</span>)]</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">6</div></div><pre>    <span class="cm-variable">start_response</span>(<span class="cm-variable">status</span>, <span class="cm-variable">response_headers</span>)</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">7</div></div><pre>    <span class="cm-keyword">return</span> [<span class="cm-string">'&lt;strong&gt;helloworld!&lt;/strong&gt;'</span>]</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">8</div></div><pre>&nbsp;</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">9</div></div><pre><span class="cm-variable">application</span> = <span class="cm-variable">sae</span>.<span class="cm-variable">create_wsgi_app</span>(<span class="cm-variable">app</span>)</pre></div></div><div class="CodeMirror-cursor" style="left: 221px; top: 72px; height: 12px;">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor" style="display: none;">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; top: 116px;">&nbsp;</div><div class="CodeMirror-gutters" style="left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></div></div><div class="codecontainer" id="codecontainer_0" tabi="0" style="display: none; height: 558px;"><div class="CodeMirror cm-s-cobalt" style="height: 558px;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 33px;"><textarea autocorrect="off" autocapitalize="off" tabindex="0" style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-hscrollbar" style="left: 29px;"><div style="height: 1px;"></div></div><div class="CodeMirror-vscrollbar"><div style="width: 1px;"></div></div><div class="CodeMirror-scrollbar-filler"></div><div class="CodeMirror-scroll" tabindex="-1"><div style="position: relative; min-height: 100%;"><div class="CodeMirror-sizer" style="min-width: 121px; margin-left: 29px; min-height: 68px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span class="cm-def">-</span><span class="cm-def">-</span><span class="cm-def">-</span></pre></div><div style="position: relative; z-index: 1; display: none;"></div><div style=""><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">1</div></div><pre><span class="cm-def">---</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre><span class="cm-atom">name</span><span class="cm-meta">: </span>nbtlxx</pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div></div><pre><span class="cm-atom">version</span><span class="cm-meta">: </span><span class="cm-number">1</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre><span class="cm-def">...</span></pre></div><div style="position: relative;"><div style="position: absolute; left: -29px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre>&nbsp;</pre></div></div><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 12px; visibility: hidden;">&nbsp;</div><div class="CodeMirror-cursor CodeMirror-secondarycursor" style="display: none; visibility: hidden;">&nbsp;</div></div></div></div></div><div style="position: absolute; height: 30px; top: 68px;">&nbsp;</div><div class="CodeMirror-gutters" style="left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div></div></div></div></div></div> </div>
+            </div>
+            <div class="clr"></div>
+        </div>
+        <div class="exmenu" id="exmenu" style="display: none;">
+            <div class="entry">编辑</div>
+            <div class="entry">下载</div>
+            <div class="entry">重命名</div>
+            <div class="entry">通过URL访问</div>
+            <div class="split">
+                <div class="line"></div>
+            </div>
+            <div class="entry">删除</div>
+        </div>
+        
+    
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dlg1" style="display: none; z-index: 1000; outline: 0px; position: absolute;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-dlg1">&nbsp;</span><a href="http://sdk.tools.sinaapp.com/index.php?appname=nbtlxx&version=1#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="dlg1" class="ui-dialog-content ui-widget-content">
+        </div><div class="ui-resizable-handle ui-resizable-n"></div><div class="ui-resizable-handle ui-resizable-e"></div><div class="ui-resizable-handle ui-resizable-s"></div><div class="ui-resizable-handle ui-resizable-w"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1001;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1002;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1003;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1004;"></div></div></body></html>

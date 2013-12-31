@@ -86,6 +86,6 @@ STATICFILES_DIRS = (
 )
 
 TEMPLATE_DIRS = (
-    ('/Users/chenxu/work/python/django_test/templates'),
-    ('/Users/chenxu/work/python/django_test/articles/templates'),
+    (os.path.join(BASE_DIR,'templates')),
+    (os.path.join(BASE_DIR,'articles/templates')),    
 )
