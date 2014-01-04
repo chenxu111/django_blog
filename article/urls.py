@@ -9,4 +9,5 @@ urlpatterns = patterns('article',
 	url(r'^create/$','views.create'),
 	url(r'^language/(?P<language>[a-z\-]+)/$','views.language'),
 	url(r'^like/(?P<article_id>\d+)/$','views.like_article'),
+	url(r'^unlike/(?P<article_id>\d+)/$','views.unlike_article'),
 )

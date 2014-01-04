@@ -87,6 +87,18 @@ def like_article(request,article_id):
 
 		return HttpResponseRedirect('/articles/get/%s'%article_id)
 
+def unlike_article(request,article_id):
+	if article_id:
+		a = Article.objects.get(id=article_id)
+		if a:
+			count = a.unlikes
+			count +=1
+			a.unlikes = count
+			a.save()
+		else:
+			print 'article is not valid'
+
+		return HttpResponseRedirect('/articles/get/%s'%article_id)
 
 
 
