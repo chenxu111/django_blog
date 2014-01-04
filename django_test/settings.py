@@ -1,3 +1,4 @@
+#encoding:utf8
 """
 Django settings for django_test project.
 
@@ -76,6 +77,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+#image upload rescource
+MEDIA_ROOT = '/Users/chenxu/work/python/django_test/static'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
@@ -83,6 +86,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     ('assets','/Users/chenxu/work/python/django_test/static'),
+    # ('assets',os.path.join(BASE_DIR,'static'),
+    # )
 )
 
 TEMPLATE_DIRS = (

@@ -55,7 +55,8 @@ def language(request,language='en-gb'):
 def create(request):
 	print 'create'
 	if request.POST:
-		form = ArticleForm(request.POST)
+		# form = ArticleForm(request.POST)
+		form = ArticleForm(request.POST,request.FILES)
 		print 'post'
 		if form.is_valid():
 			form.save()
@@ -73,6 +74,18 @@ def create(request):
 	print 'create_article'
 	return render_to_response('create_article.html',args)
 
+def like_article(request,article_id):
+	if article_id:
+		a = Article.objects.get(id=article_id)
+		if a:
+			count = a.likes
+			count+=1
+			a.likes = count
+			a.save()
+		else:
+			print 'artile is not valid'
+
+		return HttpResponseRedirect('/articles/get/%s'%article_id)
 
 
 
