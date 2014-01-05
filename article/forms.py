@@ -11,7 +11,7 @@ class ArticleForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
 	class Meta():
 		model = Comment
-		exclude = ["comment"]
+		fields = ('first_name','second_name','body')
 
 # def add_comment(request,pk):
 # 	"""add a new comment."""
@@ -29,4 +29,3 @@ class CommentForm(forms.ModelForm):
 # 		comment = cf.save(commit = False)
 # 		comment.author = author
 # 		comment.save()
-	

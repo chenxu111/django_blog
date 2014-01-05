@@ -6,6 +6,7 @@ from django.template import Context
 from django.shortcuts import render_to_response
 from forms import ArticleForm
 from forms import CommentForm
+from django.utils import timezone
 
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
@@ -118,7 +119,35 @@ def unlike_article(request,article_id):
 			print 'article is not valid'
 
 		return HttpResponseRedirect('/articles/get/%s'%article_id)
+	
+def add_comment(request,article_id):
+	article = Article.objects.get(id=article_id)
 
+	if request.POST:
+		commentForm = CommentForm(request.POST)
+		if commentForm.is_valid():
+			comment = commentForm.save(commit=False)
+			comment.pub_date = timezone.now()
+			comment.article = article
+			comment.save()
+			print 'save comment ok'
+			return HttpResponseRedirect('/articles/get/%s/'%article_id)
 
+	else:
+		commentForm = CommentForm()
 
+	args = {}
+	args.update(csrf(request))
 
+	args['article'] = article
+	args['form']	= commentForm	
+
+	return render_to_response('add_comment.html',args)
+
+def delete_comment(request,comment_id):
+	print 'delete_comment'
+	comment = Comment.objects.get(id=comment_id)
+	article_id = comment.article.id
+	comment.delete()
+
+	return HttpResponseRedirect('/articles/get/%s' %article_id)

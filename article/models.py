@@ -22,12 +22,8 @@ class Article(models.Model):
 	
 #create comment model
 class Comment(models.Model):
-	created = models.DateTimeField()
-	author  = models.CharField(max_length = 20)
+	first_name = models.CharField(max_length=20)
+	second_name = models.CharField(max_length=20)
 	body 	= models.TextField()
+	pub_date = models.DateTimeField()
 	article = models.ForeignKey(Article)
-
-	def __unicode__(self):
-		return self.body
-		# return unicode("%s:%s"%(self.article,self.body[:60]))
-

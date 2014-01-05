@@ -11,7 +11,8 @@ urlpatterns = patterns('article',
 	url(r'^language/(?P<language>[a-z\-]+)/$','views.language'),
 	url(r'^like/(?P<article_id>\d+)/$','views.like_article'),
 	url(r'^unlike/(?P<article_id>\d+)/$','views.unlike_article'),
+	url(r'^add_comment/(?P<article_id>\d+)/$','views.add_comment'),
 
-	# url(r'^add_comment/(\d+)/$','views.add_comment'),
-
+	url(r'^delete_comment/(?P<comment_id>\d+)/$','views.delete_comment'),
+	
 )
