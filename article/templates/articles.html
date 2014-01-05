@@ -20,6 +20,19 @@
 	<p> {{article.likes}} likes this article</p>
 </div>
 {% endfor %}
+
+<!--next/prev page links-->
+{% if articles.paginator.num_pages > 1%}
+{% if articles.has_previous %}
+	<a href="?page={{articles.previous_page_number}}">older blog</a>
+{%endif%}
+
+{% if articles.has_next %}
+	<a href="?page={{articles.next_page_number}}">new blog</a>
+{%endif%}
+
+{%endif %}
+
 {%else %}
 	<p>None to show</p>
 {%endif%}

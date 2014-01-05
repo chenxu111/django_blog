@@ -21,6 +21,33 @@
 <p>{{article.unlikes}} unlike this article</p>
 <p><a href="/articles/unlike/{{article.id}}">Unlike</a></p>
 
+{% for comment in comments%}
+	<br>
+	{{comment.created}}<br>
+	{{comment.author}}<br>
+	{{comment.body}}<br>
+{%endfor%}
+
+<!--add comment form-->
+Add a comment
+<!-- <form action="/accounts/auth/" method="post">{%csrf_token%}
+	<label for="username"> username</label>
+	<input type="text" name ="username" value="" id="username">
+	<label for="password"> password</label>
+	<input type="password" name ="password" value="" id="password">
+	<input type="submit" vlaue="login"/>
+</form> -->
+
+<form action="/articles/add_comment/" method="POST">
+	<label for="username"> username</label>
+	<input type="text" name ="username" value="" id="username">
+
+	<label for="body"> body</label>
+	<input type="text" name ="body" value="" id="body">
+
+	<input type="submit" value="submit"></input>
+</form>
+
 {%endblock%}
 </body>
 </html>

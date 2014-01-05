@@ -5,8 +5,11 @@ from django.template.loader import get_template
 from django.template import Context
 from django.shortcuts import render_to_response
 from forms import ArticleForm
+from forms import CommentForm
+
 from django.http import HttpResponseRedirect
 from django.core.context_processors import csrf
+from django.core.paginator import Paginator,InvalidPage,EmptyPage
 
 def hello(request):
 	name = 'mike'
@@ -24,6 +27,7 @@ def hello_from_simple(request):
 	return render_to_response('hello.html', {'name':name})
 
 from article.models import Article
+from article.models import Comment
 
 # def articles(request):
 # 	return render_to_response('articles.html',{'articles':Article.objects.all()})
@@ -40,11 +44,26 @@ def articles(request):
 		session_language = request.session['lang']
 	print "session language %s"%session_language
 
-	return render_to_response('articles.html',{'articles':Article.objects.all(),'language':language,'session_language':session_language})
+	articles = Article.objects.all().order_by("pub_date")
+	paginator = Paginator(articles,3)
+
+	try:
+		page = int(request.GET.get("page",1))
+	except ValueError:
+		page = 1
+
+	try:
+		display_articles = paginator.page(page)
+	except (InvalidPage,EmptyPage):
+		display_articles = paginator.page(paginator.num_pages)
+		
+	return render_to_response('articles.html',{'articles':display_articles,'language':language,'session_language':session_language})
 
 
 def article(request,article_id=1):
-	return render_to_response('article.html',{'article':Article.objects.get(id=article_id)})
+	myArticle = Article.objects.get(id=article_id)
+	comments = Comment.objects.filter(article=myArticle)
+	return render_to_response('article.html',{'article':myArticle, 'comments':comments})
 
 def language(request,language='en-gb'):
 	response = HttpResponse('setting language to %s' %language)

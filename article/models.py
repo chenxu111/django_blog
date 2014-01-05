@@ -1,3 +1,4 @@
+#encoding=utf8
 from django.db import models
 from time import time
 def get_upload_file_name(instance,filename):
@@ -19,3 +20,14 @@ class Article(models.Model):
 	def __unicode__(self):
 		return self.title
 	
+#create comment model
+class Comment(models.Model):
+	created = models.DateTimeField()
+	author  = models.CharField(max_length = 20)
+	body 	= models.TextField()
+	article = models.ForeignKey(Article)
+
+	def __unicode__(self):
+		return self.body
+		# return unicode("%s:%s"%(self.article,self.body[:60]))
+
