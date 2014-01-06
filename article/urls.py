@@ -14,5 +14,5 @@ urlpatterns = patterns('article',
 	url(r'^add_comment/(?P<article_id>\d+)/$','views.add_comment'),
 
 	url(r'^delete_comment/(?P<comment_id>\d+)/$','views.delete_comment'),
-	
+	url(r'^search/$','views.search_titles'),
 )

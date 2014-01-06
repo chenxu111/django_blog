@@ -3,7 +3,8 @@
 <head>
 	<title>{%block title%}my base template {%endblock%}</title>
 	<link rel="stylesheet" type="text/css" href="{%static "assets/css/default.css"%}">
-
+	<script src="{%static "assets/js/jquery-2.0.0.min.js"%}"</script>
+	<script src="{%static "assets/js/ajax.js"%}"></script>
 </head>
 <body>
 	<div id="page">
@@ -26,10 +27,9 @@
 			</p>
 		</div>
 	</div>
-
-	<footer id="footer">
+<footer id="footer">
   <div class="container">
-    <p>&copy; Copyright bisaikong 2013. All rights reserved.</p>
+    <p>&copy; Copyright pingpangkong 2013. All rights reserved.</p>
     <ul>
       <li><a href="/about" title="关于我们">关于我们</a></li>
       <li><a href="/about/contact" title="联系我们">联系我们</a></li>
@@ -39,7 +39,5 @@
     </ul>
   </div>
 </footer>
-
 </body>
-
 </html>

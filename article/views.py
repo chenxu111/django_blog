@@ -45,6 +45,9 @@ def articles(request):
 		session_language = request.session['lang']
 	print "session language %s"%session_language
 
+	args = {}
+	args.update(csrf(request))
+
 	articles = Article.objects.all().order_by("pub_date")
 	paginator = Paginator(articles,3)
 
@@ -151,3 +154,15 @@ def delete_comment(request,comment_id):
 	comment.delete()
 
 	return HttpResponseRedirect('/articles/get/%s' %article_id)
+
+def search_titles(request):
+	print 'search_titles'
+	if request.POST:
+		search_text = request.POST['search_text']
+	else:
+		search_text = ''
+
+	# title__contains, sql like 
+	articles = Article.objects.filter(title__contains=search_text)
+
+	return render_to_response('ajax_search.html',{'articles':articles})

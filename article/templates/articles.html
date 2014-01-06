@@ -7,6 +7,11 @@
 		<ul><a href="/articles/all">Articles</a></ul>
 		<ul><a href="/articles/create">Create Article</a></ul>
 	</ui>
+<h3>Search</h3>
+{%csrf_token%}
+<input type="text" id="search" name="search"></input>
+<ul id="search_results">
+</ul>
 {%endblock%}
 
 {%block content%}
